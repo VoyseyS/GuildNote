@@ -1,0 +1,457 @@
+<!--
+     Filename:	Guildnote.xml
+
+       Author:	Karin
+  Modified by:	Shaun Voysey
+
+      Version:	6.1.1
+
+  Modified on:	16th June, 2015
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+    <Script file="Localization.Lua"/>
+    <Script file="GuildNote.lua"/>
+
+    <Frame name="GuildNoteFrame" parent="UIParent" hidden="false">
+        <Scripts>
+            <OnLoad>
+                GuildNote_OnLoad(self);    
+            </OnLoad>
+            <OnEvent>
+                GuildNote_OnEvent(self, event, ...);
+            </OnEvent>
+        </Scripts>
+    </Frame>
+
+
+    <Frame name="GuildNote_GUI">
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString name="$parent_Head" inherits="GameFontNormalLarge" text="GuildNote">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="15" y="-15" />
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+
+                <FontString name="$parent_FSAlchemy" inherits="GameFontNormal" justifyh="RIGHT">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parent_Head">
+                            <Offset>
+                                <AbsDimension x="0" y="-20"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+
+                <FontString name="$parent_FSBlacksmith" inherits="GameFontNormal" justifyh="RIGHT">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSAlchemy">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSLeatherwork" inherits="GameFontNormal" justifyh="RIGHT">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSBlacksmith">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSTailoring" inherits="GameFontNormal" justifyh="RIGHT">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSLeatherwork">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSEngineering" inherits="GameFontNormal" justifyh="RIGHT">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSTailoring">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSEnchanting" inherits="GameFontNormal" justifyh="RIGHT">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSEngineering">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSInscription" inherits="GameFontNormal" justifyh="RIGHT">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSEnchanting">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSJewelcrafting" inherits="GameFontNormal" justifyh="RIGHT">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSInscription">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSMining" inherits="GameFontNormal" justifyh="Left">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent_FSAlchemy">
+                            <Offset>
+                                <AbsDimension x="225" y="0"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSSkinning" inherits="GameFontNormal" justifyh="Left">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSMining">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+
+                <FontString name="$parent_FSHerbalism" inherits="GameFontNormal" justifyh="Left">
+                    <Size>
+                        <AbsDimension x="100" y="25"/>
+                    </Size>
+
+                    <Color r="1" g="0.8" b="1" a="1"/>
+                    <FontHeight val="10"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativeTo="$parent_FSSkinning">
+                            <Offset>
+                                <AbsDimension x="0" y="-40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <EditBox name="$parent_EBAlch" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parent_Head">
+                        <Offset>
+                            <AbsDimension x="110" y="-20"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </EditBox>
+
+            <EditBox name="$parent_EBBlac" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBAlch">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBLeat" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBBlac">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBTail" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBLeat">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBEngi" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBTail">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBEnch" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBEngi">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBInsc" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBEnch">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBJewe" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBInsc">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBMini" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent_EBAlch">
+                        <Offset>
+                            <AbsDimension x="25" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBSkin" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBMini">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <EditBox name="$parent_EBHerb" inherits="InputBoxTemplate" letters="10" autoFocus="false">
+                <Size>
+                    <AbsDimension x="90" y="25"/>
+                </Size>
+
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_EBSkin">
+                        <Offset>
+                            <AbsDimension x="0" y="-40"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>      
+            </EditBox>
+
+            <Button name="$parent_BTResetAll" inherits="OptionsButtonTemplate" text="Reset">
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="-10" y="10"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        GuildNotePanel_ResetAll()
+                    </OnClick>
+                </Scripts>
+            </Button>
+
+            <Button name="$parent_BTSet1" inherits="OptionsButtonTemplate" text="Set 1">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent_BTResetAll">
+                        <Offset>
+                            <AbsDimension x="-100" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        GuildNotePanel_Set1()
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+
+        <Scripts>
+            <OnLoad>
+                GuildNotePanel_OnLoad(self);
+            </OnLoad>
+        </Scripts>
+    </Frame>
+</Ui>

@@ -1,0 +1,23 @@
+##      Interface: 60200
+##          Title: GuildNote
+##
+##          Notes: Sets your guild Public Note with your tradeskill levels.
+##
+##         Author: Karin
+##    Modified by: Shaun
+##
+##       Based on:
+##            GuildNote is based on GuildNote by Daelic (http://wow-en.curse-gaming.com/files/details/799/guildnote/),
+##            which hasn't been updated since April 2005.  This version has been tweaked for the latest version of WoW,
+##            and to present information a little better.
+##
+##            Completely Localised, Barring Herbalism.
+##
+##            Players can now enter the Trades themselves.  Defaults to 10 Characters based on the local strings ingame.
+##
+##        Version: 6.2.0
+##
+## SavedVariables: GuildNote_Config
+##
+
+GuildNote.xml
