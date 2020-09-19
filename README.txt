@@ -1,4 +1,4 @@
-GuildNote  6.1.0
+GuildNote  8.2.0
 
 By kcupit
 Modified By Shaun Voysey
@@ -89,6 +89,12 @@ beta	- Still limited to 10 Characters though.                  <sv.public@hotmai
 5.0.0	- Toc Update.
 
 6.1.0	- Toc Update.
+
+7.3.0	- Toc Update.
+
+8.0.0	- Toc Update.
+
+8.2.0	- Toc Update.
 
 
 ------------

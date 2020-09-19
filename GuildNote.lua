@@ -4,11 +4,15 @@
        Author:	Karin
   Modified by:	Shaun Voysey
 
-      Version:	6.2.1
+      Version:	8.2.0
 
-  Modified On:	1st July, 2015
+  Modified On:	29th June, 2019
 
     Notes:
+	8.2.0	Toc Update.
+
+	7.3.0	Toc Update.
+
 	6.2.1	Made sure that the Guild total is not exceeded when looking for ME.
 
 	6.2.0	Toc Update.
@@ -103,7 +107,7 @@ function GuildNote_OnEvent(frame, event, ...)
 
         --  Get the Profession Indexes
         --
-        Prof1, Prof2, _, _, _, _ = GetProfessions();
+        Prof1, Prof2 = GetProfessions();
 
         -- Sets up the public note.
         -- Each Profession shortened to a Maximum of 10 Characters unless already shortened in the Localization file.
@@ -111,7 +115,7 @@ function GuildNote_OnEvent(frame, event, ...)
         -- Get the first Profession (This Profession should be here at this point)
         --
         if Prof1 then 
-            local skillName, _, skillRank, _, _, _, _, _, _, _ = GetProfessionInfo(Prof1);
+            local skillName, _, skillRank = GetProfessionInfo(Prof1);
 
             --  First Profession.
             --
@@ -121,18 +125,19 @@ function GuildNote_OnEvent(frame, event, ...)
         --  Get the second Profession (This Profession may or may not be here).  Will be a zero Index if not present.
         --
         if Prof2 then 
-            local skillName, _, skillRank, _, _, _, _, _, _, _ = GetProfessionInfo(Prof2);
+            local skillName, _, skillRank = GetProfessionInfo(Prof2);
 
             --  Second Profession.  (If here.)
             --
             TheNote = TheNote .. "/" .. GuildNote_Output(skillName) .. " " .. skillRank;
         end
 
-        --  Post the PublicNote.  But only if changed.
+        --  Post the PublicNote.
+        --  But only if changed and the player is in the Guild Roster
         --
         local GuildIndex, GuildNote = GuildNote_FindPlayerIndex();
 
-        if not (GuildNote == TheNote) then
+        if (GuildNote ~= TheNote and GuildIndex > -1) then
             GuildRosterSetPublicNote(GuildIndex, TheNote);
 
             --  Refresh Local Guild Information.
@@ -144,7 +149,6 @@ function GuildNote_OnEvent(frame, event, ...)
         --
     end
 end -- Function
-
 
 
 --
@@ -257,7 +261,6 @@ function GuildNote_Initialise()
         return;
     end
 
-
     -- Initialise Realm data structures
     --
     if (GuildNote_Config == nil) then
@@ -268,14 +271,15 @@ function GuildNote_Initialise()
     -- Store for Posterity.
     --
     if (GuildNote_Config[Realm] == nil) then
-        local loop = 1;
 
         GuildNote_Config[Realm] = {};
         GuildNote_Config[Realm].Default = {};
         GuildNote_Config[Realm].Output = {};
 
+        local loop = 1;
+
         repeat
-            SpellName, _, _, _, _, _, _, _, _, _ = GetSpellInfo(GUILDNOTE_DB.AppSkills[loop]);
+            SpellName = GetSpellInfo(GUILDNOTE_DB.AppSkills[loop]);
 
             GuildNote_Config[Realm].Default[loop] = SpellName;
             GuildNote_Config[Realm].Output[loop] = string.sub(SpellName,1,10);
@@ -293,7 +297,6 @@ function GuildNote_Initialise()
     -- Load up the Edit Boxes with the correct text.
     --
     GuildNotePanel_CancelOrLoad();
-
 
     -- Disable set Button if empty.
     --
@@ -320,28 +323,37 @@ function GuildNote_Output(strSkillName)
         Loop = Loop + 1;
     until GUILDNOTE_DB.AppSkills[Loop] == -1;
 
-    -- Return Herbalism no matter what.  As this is the only Localised Text.
+    -- Return Herbalism no matter what.  As this is the only manually Localised Text.
     --
     return GuildNote_Config[Realm].Output[Loop];
 end
 
 
--- Match the Skill name to the Saved Default String.
+-- Find ME in the Guild Roster.
 --
 function GuildNote_FindPlayerIndex()
     local GuildIndex = 0;
+    local RosterMembers = GetNumGuildMembers()
     local CurrentPlayer = UnitName("player");
-    local RealmPlayer = UnitName("player") .. "-" .. Realm
-    local numTotalMembers, _, _ = GetNumGuildMembers();
-    local name, level, class, zone, note, officernote, online, isMobile;
+    local RealmPlayer = CurrentPlayer .. "-" .. Realm;
+    local name, note;
 
     repeat
         GuildIndex = GuildIndex + 1;
 
         --  Searching for ME.  We do not want to change other peoples notes.  D'oh.
         --
-        name, _, _, level, class, zone, note, officernote, online, _, _, _, _, isMobile = GetGuildRosterInfo(GuildIndex);
-    until (name == RealmPlayer) or (numTotalMembers >= GuildIndex) --  Finaly Have the Index in the Guild List or guildIndex runs out.
+        name, _, _, _, _, _, note = GetGuildRosterInfo(GuildIndex);
+
+    --  Finaly we have the Index in the Guild List or guildIndex runs out.
+    --
+    until (name == RealmPlayer) or (GuildIndex >= RosterMembers)
+
+    --  If we run out of Guildmembers. Set GuildIndex to -1
+    --
+    if (GuildIndex > RosterMembers) then
+        GuildIndex = -1;
+    end
 
     return GuildIndex, note;
 end

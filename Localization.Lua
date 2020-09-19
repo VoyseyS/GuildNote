@@ -4,9 +4,9 @@
        Author:	Karin
   Modified By:	Shaun Voysey
 
-      Version:	6.1.1
+      Version:	8.2.0
 
-  Modified On:	16th June, 2015
+  Modified On:	19th June, 2019
 
 	Herbalism Locale is complete.  Or should be.  The rest of the trades are pulled from the Game.
 	We cannot do this with Herbalism as the Spell is listed as "Herb Gathering".
